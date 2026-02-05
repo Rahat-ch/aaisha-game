@@ -19,7 +19,8 @@ export default function TugOfWarGame() {
     
     const interval = setInterval(() => {
       setRopePosition(prev => {
-        const newPos = prev - (Math.random() * 2 + 0.5);
+        // EASIER: Bluey and Bingo pull much slower now (0.3-0.8 per tick instead of 0.5-2.5)
+        const newPos = prev - (Math.random() * 0.5 + 0.3);
         if (newPos <= 10) {
           setWinner("bluey");
           setIsPlaying(false);
@@ -29,7 +30,7 @@ export default function TugOfWarGame() {
       
       setBlueyPulling(Math.random() > 0.5);
       setBingoPulling(Math.random() > 0.5);
-    }, 100);
+    }, 150); // Slower interval too (was 100ms)
     
     return () => clearInterval(interval);
   }, [isPlaying, winner]);
@@ -39,16 +40,17 @@ export default function TugOfWarGame() {
     
     setTaps(prev => prev + 1);
     setRopePosition(prev => {
-      const newPos = prev + 2.5;
-      if (newPos >= 90) {
+      // EASIER: Aaisha pulls stronger now (4 instead of 2.5)
+      const newPos = prev + 4;
+      if (newPos >= 85) { // Lower threshold to win (was 90)
         setWinner("aaisha");
         setIsPlaying(false);
         setScore(s => s + 1);
         confetti({
-          particleCount: 100,
-          spread: 70,
+          particleCount: 150, // More confetti!
+          spread: 100,
           origin: { y: 0.6 },
-          colors: ["#FF6B6B", "#4ECDC4", "#FFE66D", "#FF6B9D"]
+          colors: ["#FF6B6B", "#4ECDC4", "#FFE66D", "#FF6B9D", "#95E1D3", "#F38181"]
         });
       }
       return Math.min(100, newPos);
@@ -127,30 +129,67 @@ export default function TugOfWarGame() {
             <div className="absolute bottom-0 w-full h-20 bg-yellow-400"></div>
           </div>
 
+          {/* Bluey Character */}
           <motion.div 
             animate={{ x: blueyPulling ? 10 : 0 }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col items-center"
+            className="absolute left-2 top-1/2 -translate-y-1/2 flex flex-col items-center"
           >
-            <div className="text-7xl mb-2">🐕</div>
-            <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">Bluey</span>
+            {/* Bluey - Blue Heeler with darker blue ears and spots */}
+            <div className="relative">
+              {/* Body */}
+              <div className="w-20 h-20 bg-[#4A90D9] rounded-full flex items-center justify-center border-4 border-[#2E5A8C] shadow-lg">
+                {/* Inner ear color */}
+                <div className="absolute -top-2 left-2 w-6 h-8 bg-[#2E5A8C] rounded-full transform -rotate-12"></div>
+                <div className="absolute -top-2 right-2 w-6 h-8 bg-[#2E5A8C] rounded-full transform rotate-12"></div>
+                {/* Light blue belly */}
+                <div className="w-10 h-10 bg-[#87CEEB] rounded-full"></div>
+              </div>
+              {/* Tail */}
+              <div className="absolute -bottom-1 right-0 w-4 h-12 bg-[#4A90D9] rounded-full transform rotate-45 border-2 border-[#2E5A8C]"></div>
+            </div>
+            <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold mt-1 shadow-md">Bluey</span>
           </motion.div>
 
+          {/* Bingo Character */}
           <motion.div 
             animate={{ x: bingoPulling ? 8 : 0 }}
-            className="absolute left-16 top-1/2 -translate-y-1/2 flex flex-col items-center"
+            className="absolute left-20 top-1/2 -translate-y-1/2 flex flex-col items-center"
           >
-            <div className="text-5xl mb-2 opacity-80">🐕</div>
-            <span className="bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold">Bingo</span>
+            {/* Bingo - Orange/Cream Heeler */}
+            <div className="relative">
+              {/* Body */}
+              <div className="w-16 h-16 bg-[#F4A460] rounded-full flex items-center justify-center border-4 border-[#D2691E] shadow-lg">
+                {/* Inner ear color */}
+                <div className="absolute -top-1 left-2 w-5 h-6 bg-[#D2691E] rounded-full transform -rotate-12"></div>
+                <div className="absolute -top-1 right-2 w-5 h-6 bg-[#D2691E] rounded-full transform rotate-12"></div>
+                {/* Cream belly */}
+                <div className="w-8 h-8 bg-[#FFE4C4] rounded-full"></div>
+              </div>
+              {/* Tail */}
+              <div className="absolute -bottom-1 right-0 w-3 h-10 bg-[#F4A460] rounded-full transform rotate-45 border-2 border-[#D2691E]"></div>
+            </div>
+            <span className="bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold mt-1 shadow-md">Bingo</span>
           </motion.div>
 
+          {/* Aaisha Character */}
           <motion.div 
             animate={{ x: winner === "aaisha" ? -5 : 0 }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col items-center"
+            className="absolute right-2 top-1/2 -translate-y-1/2 flex flex-col items-center"
           >
-            <div className="text-7xl mb-2">👧</div>
-            <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold">Aaisha</span>
+            {/* Aaisha - Girl character */}
+            <div className="relative">
+              {/* Body */}
+              <div className="w-20 h-20 bg-[#FFB6C1] rounded-full flex items-center justify-center border-4 border-[#FF69B4] shadow-lg">
+                {/* Face */}
+                <div className="text-4xl">👧</div>
+              </div>
+              {/* Hair bow */}
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 text-2xl">🎀</div>
+            </div>
+            <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold mt-1 shadow-md">Aaisha</span>
           </motion.div>
 
+          {/* Rope */}
           <div 
             className="absolute top-1/2 h-4 bg-amber-700 rounded-full transition-all duration-100"
             style={{ 
@@ -160,8 +199,10 @@ export default function TugOfWarGame() {
             }}
           ></div>
 
+          {/* Center marker */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full border-2 border-gray-400"></div>
 
+          {/* Power meter */}
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-6 bg-gray-200 rounded-full overflow-hidden border-2 border-gray-400">
             <div 
               className="h-full bg-gradient-to-r from-blue-500 via-green-500 to-pink-500 transition-all duration-100"
@@ -238,8 +279,8 @@ export default function TugOfWarGame() {
           >
             <p className="text-gray-700 text-lg">
               🎯 <strong>How to play:</strong><br/>
-              Tap the button as fast as you can!<br/>
-              Pull the rope to your side to win!<br/>
+              Tap the pink button fast!<br/>
+              Pull the rope to your side!<br/>
               Beat Bluey and Bingo! 🐕🐕
             </p>
           </motion.div>
