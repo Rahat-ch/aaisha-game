@@ -72,27 +72,42 @@ export default function TugOfWarGame() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-300 via-sky-200 to-green-300 overflow-hidden relative">
-      <motion.div 
-        animate={{ x: [0, 100, 0] }} 
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-10 left-10 text-6xl opacity-80"
-      >☁️</motion.div>
-      <motion.div 
-        animate={{ x: [0, -80, 0] }} 
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute top-20 right-20 text-5xl opacity-70"
-      >☁️</motion.div>
+    <div className="min-h-screen bg-gradient-to-b from-sky-400 via-blue-300 to-yellow-200 overflow-hidden relative">
+      {/* Sun */}
       <motion.div 
         animate={{ rotate: 360 }} 
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className="absolute top-10 right-10 text-7xl"
+        className="absolute top-10 right-10 text-8xl"
       >☀️</motion.div>
 
-      <div className="absolute bottom-32 left-5 text-8xl">🌳</div>
-      <div className="absolute bottom-32 right-5 text-7xl">🌲</div>
-      <div className="absolute bottom-32 left-32 text-6xl">🌳</div>
-      <div className="absolute bottom-32 right-32 text-7xl">🌲</div>
+      {/* Clouds */}
+      <motion.div 
+        animate={{ x: [0, 120, 0] }} 
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        className="absolute top-16 left-10 text-6xl opacity-70"
+      >☁️</motion.div>
+      <motion.div 
+        animate={{ x: [0, -100, 0] }} 
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        className="absolute top-24 right-32 text-5xl opacity-60"
+      >☁️</motion.div>
+
+      {/* Palm Trees */}
+      <div className="absolute bottom-32 left-5 text-8xl">🌴</div>
+      <div className="absolute bottom-28 right-8 text-7xl">🌴</div>
+      <div className="absolute bottom-36 left-36 text-6xl">🌴</div>
+
+      {/* Beach Elements */}
+      <div className="absolute bottom-24 right-32 text-5xl">🏖️</div>
+      <div className="absolute bottom-20 left-28 text-4xl">🐚</div>
+      <div className="absolute bottom-16 right-48 text-3xl">⭐</div>
+
+      {/* Waves */}
+      <motion.div 
+        animate={{ x: [-20, 20, -20] }} 
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-48 left-0 right-0 text-4xl opacity-50"
+      >🌊 🌊 🌊 🌊 🌊</motion.div>
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4">
         <motion.h1 
@@ -107,9 +122,9 @@ export default function TugOfWarGame() {
           <span className="text-2xl font-bold text-green-700">🏆 Wins: {score}</span>
         </div>
 
-        <div className="relative w-full max-w-2xl h-64 bg-green-400/50 rounded-3xl border-4 border-green-600 shadow-2xl overflow-hidden">
+        <div className="relative w-full max-w-2xl h-64 bg-yellow-300/60 rounded-3xl border-4 border-yellow-500 shadow-2xl overflow-hidden">
           <div className="absolute inset-0 opacity-30">
-            <div className="absolute bottom-0 w-full h-20 bg-green-500"></div>
+            <div className="absolute bottom-0 w-full h-20 bg-yellow-400"></div>
           </div>
 
           <motion.div 
@@ -237,10 +252,11 @@ export default function TugOfWarGame() {
         )}
       </div>
 
-      <div className="absolute bottom-10 left-10 text-3xl">🌸</div>
-      <div className="absolute bottom-8 left-24 text-2xl">🌼</div>
-      <div className="absolute bottom-12 right-16 text-3xl">🌻</div>
-      <div className="absolute bottom-6 right-32 text-2xl">🌷</div>
+      {/* Beach decorations */}
+      <div className="absolute bottom-10 left-10 text-3xl">🐚</div>
+      <div className="absolute bottom-8 left-24 text-2xl">⭐</div>
+      <div className="absolute bottom-12 right-16 text-3xl">🦀</div>
+      <div className="absolute bottom-6 right-32 text-2xl">🏐</div>
     </div>
   );
 }
