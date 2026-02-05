@@ -11,7 +11,7 @@ export default function TugOfWarGame() {
   const [score, setScore] = useState(0);
   const [blueyPulling, setBlueyPulling] = useState(false);
   const [bingoPulling, setBingoPulling] = useState(false);
-  const [winner, setWinner] = useState(null);
+  const [winner, setWinner] = useState<null | "bluey" | "aaisha">(null);
   const [taps, setTaps] = useState(0);
 
   useEffect(() => {
